@@ -1,27 +1,27 @@
 import axios from 'axios'
 import { deleteRequestHeadersHost, getRequestUrl } from '../helpers/request'
 
-class CorsController {
+class CORSController {
   static DEFAULT_HEADERS = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   }
 
-  async get(req, res) {
+  async get(request, response) {
     try {
-      const url = getRequestUrl(req)
-      deleteRequestHeadersHost(req.headers)
+      const url = getRequestUrl(request)
+      deleteRequestHeadersHost(request.headers)
 
       const { data, status, headers } = await axios.get(url, {
         headers: {
-          ...CorsController.DEFAULT_HEADERS,
-          ...req.headers,
+          ...CORSController.DEFAULT_HEADERS,
+          ...request.headers,
         },
       })
 
-      return res.json(data).status(status)
+      return response.json(data).status(status)
     } catch (e) {
-      return res
+      return response
         .json({
           error: 'Something went wrong. :(',
         })
@@ -29,30 +29,30 @@ class CorsController {
     }
   }
 
-  async post(req, res) {
+  async post(request, response) {
     try {
       const url = getRequestUrl(url)
-      deleteRequestHeadersHost(req.headers)
+      deleteRequestHeadersHost(request.headers)
 
       const { data, status } = await axios.post(
         url,
         {
-          ...req.body,
+          ...request.body,
         },
         {
           headers: {
-            ...CorsController.DEFAULT_HEADERS,
-            ...req.headers,
+            ...CORSController.DEFAULT_HEADERS,
+            ...request.headers,
           },
         }
       )
 
-      return res.json(data).status(status)
+      return response.json(data).status(status)
     } catch (error) {
       console.log('[ERROR]')
-      return res.json({ error: 'Something went wrong. :(' }).status(500)
+      return response.json({ error: 'Something went wrong. :(' }).status(500)
     }
   }
 }
 
-export default new CorsController()
+export default new CORSController()

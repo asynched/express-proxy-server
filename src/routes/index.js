@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import CorsController from '../controllers/CorsController'
+import CORSController from '../controllers/CORSController'
 
 const router = Router()
 
-router.get('/*', CorsController.get)
-router.post('/*', CorsController.post)
+router.get('/*', CORSController.get)
+router.post('/*', CORSController.post)
 
 export default router

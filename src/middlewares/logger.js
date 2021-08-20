@@ -1,11 +1,11 @@
 /**
  *
- * @param {import('express').Request} req
- * @param {import('express').Response} res
+ * @param {import('express').Request} request
+ * @param {import('express').Response} response
  * @param {import('express').NextFunction} next
  */
-export const logger = (req, res, next) => {
-  console.log('[REQUEST]:', req.url)
+export const logger = (request, response, next) => {
+  console.log('[REQUEST]:', request.url)
 
   next()
 }
